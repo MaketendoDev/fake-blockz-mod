@@ -4,6 +4,7 @@ import com.maketendo.blocks.FakeBlock;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -18,20 +19,15 @@ public class FakeBlockzMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		Registries.BLOCK.forEach(block -> tryRegisterGhost(block));
+		List<Block> blocksToGhost = List.of(Blocks.GRASS_BLOCK, Blocks.STONE, Blocks.DIRT); // testing
 
-		RegistryEntryAddedCallback.event(Registries.BLOCK).register((rawId, id, block) -> {
-			tryRegisterGhost(block);
-		});
+		for (Block block : blocksToGhost) {
+			Identifier id = Registries.BLOCK.getId(block);
+			if (id != null && !id.getNamespace().equals(MOD_ID)) {
+				FakeBlockzBlocks.registerGhostVersion(block, id);
+			}
+		}
 
 		LOGGER.info("Successfully Initialized Fake Blockz Mod!");
-	}
-
-
-	private void tryRegisterGhost(Block block) {
-		Identifier id = Registries.BLOCK.getId(block);
-		if (id != null && !id.getNamespace().equals(MOD_ID)) {
-			FakeBlockzBlocks.registerGhostVersion(block, id);
-		}
 	}
 }
