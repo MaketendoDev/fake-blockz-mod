@@ -3,9 +3,9 @@
 	"id": "fakeblocks",
 	"version": "${version}",
 	"name": "Fake Blockz Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Have a fake block to go through to make your secret base better or your hidden trap more hidden for 1.20.1 Fabric Minecraft!",
 	"authors": [
-		"Me!"
+		"Maketendo"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -20,9 +20,6 @@
 		],
 		"client": [
 			"com.maketendo.FakeBlockzModClient"
-		],
-		"fabric-datagen": [
-			"com.maketendo.FakeBlockzModDataGenerator"
 		]
 	},
 	"mixins": [
@@ -37,8 +34,5 @@
 		"minecraft": "~1.20.1",
 		"java": ">=17",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
