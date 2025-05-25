@@ -23,7 +23,7 @@ public class FakeBlockzMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final ItemGroup MAIN_TAB = FabricItemGroup.builder()
-			.icon((Supplier<ItemStack>) Items.BARRIER)
+			.icon(() -> new ItemStack(Items.BARRIER))
 			.displayName(Text.literal("Fake Blockz"))
 			.entries((context, entries) -> {
 				for (Item item : Registries.ITEM) {
@@ -37,15 +37,9 @@ public class FakeBlockzMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		List<Block> blocksToGhost = List.of(Blocks.GRASS_BLOCK, Blocks.STONE, Blocks.DIRT,Blocks.STONECUTTER); // testing
-
-		for (Block block : blocksToGhost) {
-			Identifier id = Registries.BLOCK.getId(block);
-			if (id != null && !id.getNamespace().equals(MOD_ID)) {
-				FakeBlockzBlocks.registerGhostVersion(block, id);
-			}
-		}
+		FakeBlockzBlocks.registerAllVanillaGhostBlocks();
 		FakeBlockzBlocks.registerBlockEntityType();
+
 		Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "fake_blocks"), MAIN_TAB);
 
 		LOGGER.info("Successfully Initialized Fake Blockz Mod!");

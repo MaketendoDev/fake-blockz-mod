@@ -46,7 +46,7 @@ public class ItemRendererMixin {
         BakedModel model = renderManager.getModel(state);
 
         matrices.push();
-        matrices.scale(0.3f, 0.3f, 0.3f);
+        matrices.scale(0.25f, 0.3f, 0.3f);
         matrices.translate(-0.5f, -0.5f, -0.5f);
 
         RenderLayer layer = RenderLayers.getBlockLayer(state);
